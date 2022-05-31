@@ -1,0 +1,30 @@
+version: "3.7"
+
+services:
+  happy-database:
+    image: postgres
+    container_name: happy-database
+    ports: 
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=gercom
+      - POSTGRES_PASSWORD=extensao
+      - POSTGRES_DB=happy
+    volumes:
+      - pgdata:/data/postgres
+  
+  app:
+    build: .
+    container_name: happy-api
+    ports:
+      - 10009:3333
+    volumes:
+      - .:/usr/app
+    links:
+      - happy-database
+    depends_on:
+      - happy-database
+
+volumes:
+  pgdata:
+    driver: local

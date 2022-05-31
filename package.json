@@ -1,11 +1,11 @@
 {
-	"name": "orfanato",
+	"name": "happy-backend",
 	"version": "1.0.0",
 	"main": "index.js",
 	"license": "MIT",
 	"scripts": {
 		"dev": "ts-node-dev src/index.ts",
-		"reapply": "yarn prisma migrate reset && yarn prisma migrate dev"
+		"migrate": "prisma migrate dev"
 	},
 	"devDependencies": {
 		"@types/bcryptjs": "^2.4.2",

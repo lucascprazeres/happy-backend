@@ -15,10 +15,11 @@ import { ensureAuthentication } from "./middlewares/ensureAuthentication";
 
 export const router = Router();
 
-router.post("/user", ensureAuthentication, new CreateUserController().handle);
-router.post("/orphanage", new CreateOrphanageController().handle);
+
+router.post("/orphanages", new CreateOrphanageController().handle);
+
 router.put(
-	"/image/:orphanageID",
+	"/images/:orphanageID",
 	ensureAuthentication,
 	multer(multerConfig).single("file"),
 	new UploadImageController().handle
@@ -26,29 +27,24 @@ router.put(
 router.post("/login", new AuthenticateUserController().handle);
 
 router.get(
-	"/orphanage/approved",
+	"/orphanages",
 	ensureAuthentication,
 	new GetAllApprovedOrphanagesController().handle
 );
 router.get(
-	"/orphanage/pending",
+	"/orphanages/pending",
 	ensureAuthentication,
 	new GetAllPendingOrphanagesController().handle
 );
 
 router.put(
-	"/orphanage/:id",
+	"/orphanages/:id",
 	ensureAuthentication,
 	new ApproveOrphanageController().handle
 );
 
 router.delete(
-	"/user/:id",
-	ensureAuthentication,
-	new DeleteUserController().handle
-);
-router.delete(
-	"/orphanage/:id",
+	"/orphanages/:id",
 	ensureAuthentication,
 	new DeleteOrphanageController().handle
 );
